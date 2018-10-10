@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.taskqueue.Queue;
+import com.google.appengine.api.taskqueue.QueueFactory;
+import com.google.appengine.api.taskqueue.TaskOptions;
 
 @WebServlet(
     name = "HelloAppEngine",
@@ -33,6 +36,9 @@ public class HelloAppEngine extends HttpServlet {
 	  
 	  ds.put(person);
 	      
+	  Queue queue = QueueFactory.getDefaultQueue();
+	  queue.add(TaskOptions.Builder.withUrl("/task"));
+	  
 	  response.sendRedirect("response.html");
 
   }
