@@ -18,12 +18,13 @@ import com.google.appengine.api.datastore.Entity;
 public class BackEndTask extends HttpServlet {
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) 
+  public void doGet(HttpServletRequest request, HttpServletResponse response) 
       throws IOException {
 	  
-	 System.out.println("Back end task");
+	  String name = request.getParameter("name");
+	  System.out.println("Back end task receives: " + name);
+	  
+	  //response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 	 
-	 
-	
   }
 }

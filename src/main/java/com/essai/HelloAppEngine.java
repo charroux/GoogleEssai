@@ -13,6 +13,7 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.taskqueue.Queue;
 import com.google.appengine.api.taskqueue.QueueFactory;
 import com.google.appengine.api.taskqueue.TaskOptions;
+import com.google.appengine.api.taskqueue.TaskOptions.Method;
 
 @WebServlet(
     name = "HelloAppEngine",
@@ -37,7 +38,7 @@ public class HelloAppEngine extends HttpServlet {
 	  ds.put(person);
 	      
 	  Queue queue = QueueFactory.getDefaultQueue();
-	  queue.add(TaskOptions.Builder.withUrl("/task"));
+	  queue.add(TaskOptions.Builder.withUrl("/task").method(Method.GET).param("name", name));
 	  
 	  response.sendRedirect("response.html");
 
